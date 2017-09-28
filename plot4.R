@@ -1,4 +1,4 @@
-library(tidyverse);library(stringr);library(lubridate)
+library(tidyverse);library(stringr);library(lubridate);library(png)
 rm(list=ls())
 
 #load data filter the dates of interest, and paste date and time variables together
@@ -16,6 +16,7 @@ data.power <- read_delim('../household_power_consumption.txt',delim = ';',na = '
   mutate(datetime = dmy_hms(paste(Date,Time)))
 
 ##Create 4 plots in the same image
+png('plot4.png',width = 480,height = 480)
 par(mfcol = c(2,2))
 
 #Plot Global active power over time
@@ -34,7 +35,4 @@ plot(data.power$datetime,data.power$Voltage,type = 'l',xlab = 'datetime',ylab = 
 #Global reactive power over time
 plot(data.power$datetime,data.power$Global_reactive_power,type = 'l',xlab = 'datetime',ylab = 'Global_reactive_power')
 
-
-#save plot
-dev.copy(png,file = "plot4.png")
 dev.off()

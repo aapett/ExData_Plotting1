@@ -1,4 +1,4 @@
-library(tidyverse);library(stringr)
+library(tidyverse);library(stringr);library(png)
 rm(list=ls())
 
 #load data and filter the dates of interest
@@ -14,9 +14,7 @@ data.power <- read_delim('../household_power_consumption.txt',delim = ';',na = '
   filter(Date >= "2007-02-01", Date <= "2007-02-02")
 
 #create histogram of Global Active Power
+png('plot1.png',width = 480,height = 480)
 hist(data.power$Global_active_power, col = "Red", main = 'Global Active Power', xlab = 'Global Active Power (kilowatts)')
-
-#save histogram
-dev.copy(png,file = "plot1.png")
 dev.off()
 

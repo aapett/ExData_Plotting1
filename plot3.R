@@ -1,4 +1,4 @@
-library(tidyverse);library(stringr);library(lubridate)
+library(tidyverse);library(stringr);library(lubridate);library(png)
 rm(list=ls())
 
 #load data filter the dates of interest, and paste date and time variables together
@@ -16,14 +16,10 @@ data.power <- read_delim('../household_power_consumption.txt',delim = ';',na = '
   mutate(datetime = dmy_hms(paste(Date,Time)))
 
 #plot sub_metering1,2,3 over time
+png('plot3.png',width = 480,height = 480)
 plot(data.power$datetime,data.power$Sub_metering_1, type = 'n',xlab = '',ylab="Energy sub metering")
 lines(data.power$datetime,data.power$Sub_metering_1)
 lines(data.power$datetime,data.power$Sub_metering_2, col = 'red')
 lines(data.power$datetime,data.power$Sub_metering_3, col = 'blue')
 legend('topright',lty = c(1,1,1),col = c('black','red','blue'),legend=c('Sub_metering_1','Sub_metering_2','Sub_metering_3'))
-
-
-
-#save plot
- dev.copy(png,file = "plot3.png")
  dev.off()

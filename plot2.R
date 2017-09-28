@@ -1,4 +1,4 @@
-library(tidyverse);library(stringr);library(lubridate)
+library(tidyverse);library(stringr);library(lubridate);library(png)
 rm(list=ls())
 
 #load data filter the dates of interest, and paste date and time variables together
@@ -16,9 +16,7 @@ data.power <- read_delim('../household_power_consumption.txt',delim = ';',na = '
   mutate(datetime = dmy_hms(paste(Date,Time)))
 
 #plot Global Active Power over time
+png('plot2.png',width = 480,height = 480)
 plot(data.power$datetime,data.power$Global_active_power, type = 'l',xlab = '',ylab="Global Active Power (kilowatts)")
-
-#save plot
-dev.copy(png,file = "plot2.png")
 dev.off()
 
